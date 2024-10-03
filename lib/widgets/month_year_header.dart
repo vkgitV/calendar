@@ -24,13 +24,13 @@ class MonthYearHeader extends StatelessWidget {
             children: [ Container(
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(6.0), // Rounded corners
+                borderRadius: BorderRadius.circular(6.0),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.2), // Shadow for effect
+                    color: Colors.grey.withOpacity(0.2),
                     spreadRadius: 1,
                     blurRadius: 3,
-                    offset: const Offset(0, 1), // Shadow position
+                    offset: const Offset(0, 1),
                   ),
                 ],
               ),
@@ -41,7 +41,7 @@ class MonthYearHeader extends StatelessWidget {
             ),
 
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 2.0), // Margin for spacing
+                margin: const EdgeInsets.symmetric(horizontal: 2.0),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(6.0),
