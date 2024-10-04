@@ -1,19 +1,12 @@
-abstract class CalendarState {
+class CalendarState  {
   final Map<DateTime, Map<String, String>> events;
-
   const CalendarState({this.events = const {}});
-}
-
-class InitialCalendarState extends CalendarState {
-  const InitialCalendarState() : super(events: const {});
-}
-
-class AddEventState extends CalendarState {
-  AddEventState(DateTime date, String eventName, String eventTime)
-      : super(events: {
-    date: {
+  addEvent(DateTime date, String eventName, String eventTime)  {
+    final newEvents = Map<DateTime, Map<String, String>>.from(events);
+    newEvents[date] = {
       'name': eventName,
       'time': eventTime,
-    },
-  });
+    };
+    return CalendarState(events: newEvents);
+  }
 }

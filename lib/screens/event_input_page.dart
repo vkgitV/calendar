@@ -11,10 +11,17 @@ class EventInputPage extends StatefulWidget {
 }
 
 class EventInputPageState extends State<EventInputPage> {
+  final ValueNotifier<String> _amPmNotifier = ValueNotifier('AM');
+
+  @override
+  void dispose() {
+    _amPmNotifier.dispose();
+    super.dispose();
+  }
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _hourController = TextEditingController();
   final TextEditingController _minuteController = TextEditingController();
-  String _amPm = 'AM';
+  // String _amPm = 'AM';
   final _formKey = GlobalKey<FormState>();
 
   bool _isValidTime(String hour, String minute) {
@@ -86,23 +93,27 @@ class EventInputPageState extends State<EventInputPage> {
                     ),
                   ),
                   const SizedBox(width: 10),
-                  Expanded(
-                    child: DropdownButtonFormField<String>(
-                      value: _amPm,
-                      decoration: const InputDecoration(labelText: 'AM/PM'),
-                      items: ['AM', 'PM']
-                          .map((label) => DropdownMenuItem(
-                        value: label,
-                        child: Text(label),
-                      ))
-                          .toList(),
-                      onChanged: (value) {
-                        setState(() {
-                          _amPm = value!;
-                        });
-                      },
-                    ),
-                  ),
+      Expanded(
+        child: ValueListenableBuilder<String>(
+          valueListenable: _amPmNotifier,
+          builder: (context, value, child) {
+            return DropdownButtonFormField<String>(
+              value: value, // Bind the value from ValueNotifier
+              decoration: const InputDecoration(labelText: 'AM/PM'),
+              items: ['AM', 'PM'].map((label) {
+                return DropdownMenuItem(
+                  value: label,
+                  child: Text(label),
+                );
+              }).toList(),
+              onChanged: (newValue) {
+                // Update the notifier value and state
+                _amPmNotifier.value = newValue!;
+              },
+            );
+          },
+        ),
+      ),
                 ],
               ),
               const SizedBox(height: 10),
@@ -111,7 +122,7 @@ class EventInputPageState extends State<EventInputPage> {
                   if (_formKey.currentState!.validate() &&
                       _isValidTime(_hourController.text, _minuteController.text)) {
                     String formattedTime =
-                        "${_hourController.text}:${_minuteController.text} $_amPm";
+                        "${_hourController.text}:${_minuteController.text} ${_amPmNotifier.value}";
 
                     Navigator.pop(context, {
                       'name': _nameController.text,
