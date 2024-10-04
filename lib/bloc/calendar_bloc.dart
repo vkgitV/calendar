@@ -4,10 +4,10 @@ import 'calendar_event.dart';
 import 'calendar_state.dart';
 
 class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
-  CalendarBloc() : super(const CalendarState()) {
+  CalendarBloc() : super( InitialCalendarState()) {
     on<AddEvent>((event, emit) {
 
-      emit(state.addEvent(event.date, event.eventName, event.eventTime));
+      emit(AddEventState(event.date, event.eventName, event.eventTime));
     });
   }
 }

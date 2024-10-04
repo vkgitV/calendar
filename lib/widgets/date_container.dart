@@ -5,8 +5,8 @@ import 'add_event.dart';
 
 
 class DateContainer extends StatefulWidget {
-  const DateContainer({super.key,required this.selectedDate});
-  final DateTime selectedDate ;
+  const DateContainer({super.key});
+  // final DateTime selectedDate ;
 
 
   @override

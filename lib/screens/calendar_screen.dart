@@ -36,7 +36,7 @@ class CustomCalendarState extends State<CustomCalendar> {
             children: Util.weekdays.map((day) => Center(child: Text(day))).toList(),
           ),
 
-          DateContainer(selectedDate: selectedDate,)
+          const DateContainer()
         ],
       ),
     );
